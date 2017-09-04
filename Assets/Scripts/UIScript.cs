@@ -4,21 +4,21 @@ using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
-	public Button playPauseButton; 
+	public Button playPauseButton; 		// play pause button
 	public Sprite playImage;
 	public Sprite pauseImage;
 	Sprite currentImage;
 
 //	public Scrollbar timelineScroll;
-	Scrollbar timeline;
+	Scrollbar timeline;					// slider 
 
-	public Toggle toggleGI;
+	public Toggle toggleGI;				// checkbox for GI (= Global Illumination)
 
 	bool isPlaying =  true;
 	bool GIOn = true;
 
 	GameObject lightObject;
-	Light sunLight;
+	Light sunLight;						// sun
 
 	// Use this for initialization
 	void Start () 
@@ -26,6 +26,7 @@ public class UIScript : MonoBehaviour
 		playPauseButton.GetComponent<Image>().sprite = pauseImage;
 		currentImage = pauseImage;
 
+		// getting GameObjects in scene
 		lightObject = GameObject.FindWithTag ("GILayer");
 		timeline = lightObject.GetComponent<IntensityCycleScript> ().scroll;
 		sunLight = lightObject.GetComponent<IntensityCycleScript> ().mainLight;
@@ -51,6 +52,8 @@ public class UIScript : MonoBehaviour
 			lightObject.GetComponent<IntensityCycleScript> ().ResetRotateSpeed ();	//timelineScroll.enabled = true;
 	}
 
+
+	// updates text and disables/enables GI in scene on unchecking/checking the toggle
 	public void GIDisabled()
 	{
 		if (GIOn) 
@@ -67,7 +70,7 @@ public class UIScript : MonoBehaviour
 		GIOn = !GIOn;
 	}
 
-
+	// action to take on clicking the play/pause button
 	public void PlayPause()
 	{
 		if (isPlaying)
